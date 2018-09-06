@@ -1,0 +1,154 @@
+.favourite-devices {
+  display: flex;
+  margin-top: 29px;
+  margin-left: 20px;
+//  border: 1px solid blue;
+  width: calc(100vw - 40px);
+  min-height: 170px;
+  overflow: hidden;
+
+  @media screen and (min-width: 670px) {
+    margin-left: 0;
+    align-self: center;
+    width: 630px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    align-self: initial;
+    margin-left: 40px;
+    width: 100%;
+  }
+}
+
+.section-name-favourite-devices {
+  @extend %section-name;
+
+  margin-right: 0.95vw;
+}
+
+.container-favourite-devices-name-and-filters {
+  display: flex;
+  flex-direction: row;
+//  border: 1px solid yellowgreen;
+  width: 630px;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (min-width: 1368px) {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+%favourite-devices-filters-menu {
+  @extend %control-button;
+
+  display: none;
+  margin-right: 10px;
+
+  @media screen and (min-width: 1368px) {
+    display: block;
+  }
+}
+
+.favourite-devices-filters-menu-mob {
+  @extend %control-button;
+
+  display: block;
+  background-color: #ffd93e;
+
+  @media screen and (min-width: 1368px) {
+    display: none;
+  }
+}
+
+.favourite-devices-filters-menu-item-link {
+  @extend %control-button-text;
+
+  font-weight: bold;
+}
+
+.container-favourite-devices-title {
+  width: calc(100vw - 40px);
+  margin-right: 40px;
+//  border: 1px solid red;
+  display: flex;
+  justify-content: space-between;
+
+  @media screen and (min-width: 1368px) {
+    width: calc(100vw - 80px);
+  }
+}
+
+.favourite-devices-panels-container-outer {
+  width: calc(100vw - 40px);
+  height: 8.77vw;
+  position: relative;
+//  border: 1px solid pink;
+  margin-top: 17px;
+
+  @media screen and (min-width: 670px) {
+    width: 630px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    width: 100%;
+  }
+}
+
+.favourite-devices-panels-container {
+  width: calc(100vw - 40px);
+  position: absolute;
+//  border: 1px solid green;
+  top: 0;
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width: 670px) {
+    width: 630px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    width: 100%;
+  }
+}
+
+.favourite-device-panel {
+  @extend %small-panel;
+
+  height: 8.77vw;
+  min-height: 120px;
+//  border: 1px solid blue;
+  margin-right: 15px;
+
+  @media screen and (min-width: 1368px) {
+    margin-right: 1.09vw;
+  }
+}
+
+.favourite-device-panel-content {
+  @extend %small-panel-content;
+
+  height: 6.72vw;
+  min-height: 92px;
+}
+
+.favourite-device-panel-icon {
+  @extend %small-panel-icon;
+}
+
+.favourite-device-panel-text-primary {
+  @extend %small-panel-text-primary;
+}
+
+.favourite-device-panel-text-secondary {
+  @extend %small-panel-text-secondary;
+}

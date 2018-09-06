@@ -1,0 +1,129 @@
+.favourite-scenarios {
+  margin-top: 29px;
+  width: calc(100vw - 40px);
+  height: 140px;
+  margin-left: 20px;
+//  border: 1px solid red;
+
+  @media screen and (min-width: 670px) {
+    align-self: center;
+    margin-left: 0;
+    width: 630px;
+    height: 100%;
+  }
+
+  @media screen and (min-width: 1368px) {
+    align-self: initial;
+    margin-left: 26px;
+    width: calc(50vw - 40px - 13px);
+    height: 100%;
+  }
+}
+
+.favourite-scenarios-section-name {
+  @extend %section-name;
+
+//  border: 2px solid purple;
+}
+
+.container-favourite-scenarios-title {
+//  border: 1px solid purple;
+  display: flex;
+  justify-content: space-between;
+}
+
+.favourite-scenarios-panels-container-outer {
+  position: relative;
+//  border: 1px solid blue;
+  margin-top: 20px;
+  height: 104px;
+  width: calc(100vw - 40px);
+
+  @media screen and (min-width: 670px) {
+    width: 630px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    height: 24.19vw;
+    width: 100%;
+  }
+}
+
+.favourite-scenarios-panels-container {
+//  border: 1px solid blue;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  width: calc(100vw - 40px);
+  height: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (min-width: 670px) {
+    width: 630px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.favourite-scenario-panels-container-first-stroke {
+  display: flex;
+  flex-direction: row;
+//  border: 1px solid blue;
+
+  @media screen and (min-width: 670px) {
+    margin-bottom: 15px;
+  }
+
+  @media screen and (min-width: 1368px) {
+    margin-bottom: 1.09vw;
+  }
+}
+
+.favourite-scenario-panels-container-second-stroke {
+  display: flex;
+  flex-direction: row;
+//  border: 1px solid purple;
+}
+
+.favourite-scenario-panel {
+  @extend %small-panel;
+
+//  border: 1px solid black;
+  height: 7.3vw;
+  min-height: 100px;
+  margin-right: 15px;
+
+  @media screen and (min-width: 1368px) {
+    margin-right: 1.09vw;
+  }
+}
+
+.favourite-scenario-panel-content {
+  @extend %small-panel-content;
+
+  height: 5.26vw;
+  min-height: 72px;
+}
+
+.favourite-scenario-panel-icon {
+  @extend %small-panel-icon;
+}
+
+.favourite-scenario-panel-text-primary {
+  @extend %small-panel-text-primary;
+}
+
+.favourite-scenario-panel-text-secondary {
+  @extend %small-panel-text-secondary;
+}

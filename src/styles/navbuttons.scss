@@ -1,0 +1,47 @@
+.nav-buttons-scenarios {
+  align-self: flex-end;
+  display: flex;
+}
+
+.nav-buttons-devices {
+  align-self: flex-end;
+  display: none;
+
+  @media screen and (min-width: 1368px) {
+    display: flex;
+  }
+}
+
+%button {
+  height: 16px;
+  width: 16px;
+  padding-right: 4.1px;
+  padding-left: 4.1px;
+
+  @media screen and (min-width: 1368px) {
+    height: 1.16vw;
+    width: 1.16vw;
+    padding-right: 0.29vw;
+    padding-left: 0.29vw;
+  }
+}
+
+.prev-button {
+  @extend %button;
+}
+
+.next-button {
+  @extend %button;
+
+  margin-left: 15px;
+  transform: rotate(180deg);
+
+  @media screen and (min-width: 1368px) {
+    margin-left: 1.09vw;
+  }
+}
+
+.down-button {
+//  border: 1px solid grey;
+  transform: translateY(2px) rotate(180deg);
+}

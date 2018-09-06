@@ -1,0 +1,48 @@
+$filters-default-color-active: #ffd93e;
+$filters-default-color: #f7f7f7;
+$filters-default-color-popup: #f2f1f0;
+
+#all-filter-btn {
+  @extend %favourite-devices-filters-menu;
+
+  background-color: $filters-default-color-active;
+}
+
+#kitchen-filter-btn,
+#hall-filter-btn,
+#lamps-filter-btn,
+#cams-filter-btn {
+  @extend %favourite-devices-filters-menu;
+
+  background-color: $filters-default-color;
+}
+
+.all,
+.kitchen,
+.hall,
+.lamps,
+.cams {
+  visibility: visible;
+}
+
+#modal-container-panel-controls-btn-1 {
+  @extend %modal-container-panel-controls-buttons;
+
+  background-color: $filters-default-color-active;
+}
+
+#modal-container-panel-controls-btn-2,
+#modal-container-panel-controls-btn-3,
+#modal-container-panel-controls-btn-4 {
+  @extend %modal-container-panel-controls-buttons;
+
+  background-color: $filters-default-color-popup;
+}
+
+#modal-container-panel-controls-buttons-text-1,
+#modal-container-panel-controls-buttons-text-2,
+#modal-container-panel-controls-buttons-text-3,
+#modal-container-panel-controls-buttons-text-4 {
+  @extend %modal-container-panel-controls-buttons-text;
+}
+
