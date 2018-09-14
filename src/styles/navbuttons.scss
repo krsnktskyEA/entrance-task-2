@@ -17,6 +17,7 @@
   width: 16px;
   padding-right: 4.1px;
   padding-left: 4.1px;
+  opacity: 0.2;
 
   @media screen and (min-width: 1368px) {
     height: 1.16vw;
@@ -26,11 +27,26 @@
   }
 }
 
-.prev-button {
+#prev-button-dev {
   @extend %button;
 }
 
-.next-button {
+#next-button-dev {
+  @extend %button;
+
+  margin-left: 15px;
+  transform: rotate(180deg);
+
+  @media screen and (min-width: 1368px) {
+    margin-left: 1.09vw;
+  }
+}
+
+#prev-button-sce {
+  @extend %button;
+}
+
+#next-button-sce {
   @extend %button;
 
   margin-left: 15px;
@@ -42,6 +58,7 @@
 }
 
 .down-button {
-//  border: 1px solid grey;
-  transform: translateY(2px) rotate(180deg);
+  transform: translateY(1px) rotate(180deg);
+  transition: transform 0.4s;
+  z-index: 9;
 }

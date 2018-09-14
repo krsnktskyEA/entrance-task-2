@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Яндекс Дом</title>
     <link rel="stylesheet" href="index.css">
-    <script async type="text/javascript" src="index.js"></script>
+    <script defer type="text/javascript" src="index.js"></script>
   </head>
   <body>
     <div id="main-wrapper">
@@ -90,15 +90,16 @@
               <div class="container-favourite-scenarios-title">
                 <div class="favourite-scenarios-section-name">Избранные сценарии</div>
                 <div class="nav-buttons-scenarios">
-                  <img class="prev-button" src="Icons / Arrow Right / M Copy@2x.png">
-                  <img class="next-button" src="Icons / Arrow Right / M Copy@2x.png">
+                  <img id="prev-button-sce" src="icon-arrow-nav.png">
+                  <img id="next-button-sce" src="icon-arrow-nav.png">
                 </div>
               </div>
 
               <div class="favourite-scenarios-panels-container-outer">
                 <div class="favourite-scenarios-panels-container">
                   <div class="favourite-scenario-panels-container-first-stroke">
-                    <div class="favourite-scenario-panel">
+
+                    <div id="favourite-scenario-1" class="favourite-scenario-panel">
                       <div class="favourite-scenario-panel-content" >
                         <object class="favourite-scenario-panel-icon" type="image/svg+xml" data="icon_sun_2.svg" width="24" height="24"></object>
                         <div class="favourite-scenario-panel-text">
@@ -107,7 +108,7 @@
                       </div>
                     </div>
                     
-                    <div class="favourite-scenario-panel">
+                    <div id="favourite-scenario-2" class="favourite-scenario-panel">
                       <div class="favourite-scenario-panel-content" >
                         <object class="favourite-scenario-panel-icon" type="image/svg+xml" data="icon_scheduled.svg" width="24" height="24"></object>
                         <div class="favourite-scenario-panel-text">
@@ -116,7 +117,7 @@
                       </div>
                     </div>
                     
-                    <div class="favourite-scenario-panel">
+                    <div id="favourite-scenario-3" class="favourite-scenario-panel">
                       <div class="favourite-scenario-panel-content" >
                         <object class="favourite-scenario-panel-icon" type="image/svg+xml" data="icon_sun_2.svg" width="24" height="24"></object>
                         <div class="favourite-scenario-panel-text">
@@ -127,7 +128,7 @@
                   </div>
   
                   <div class="favourite-scenario-panels-container-second-stroke">
-                    <div class="favourite-scenario-panel">
+                    <div id="favourite-scenario-4" class="favourite-scenario-panel">
                       <div class="favourite-scenario-panel-content" >
                         <object class="favourite-scenario-panel-icon" type="image/svg+xml" data="icon_temperature_2.svg" width="24" height="24"></object>
                         <div class="favourite-scenario-panel-text">
@@ -137,7 +138,7 @@
                       </div>
                     </div>
               
-                    <div class="favourite-scenario-panel">
+                    <div id="favourite-scenario-5" class="favourite-scenario-panel">
                       <div class="favourite-scenario-panel-content" >
                         <object class="favourite-scenario-panel-icon" type="image/svg+xml" data="icon_temperature_2.svg" width="24" height="24"></object>
                         <div class="favourite-scenario-panel-text">
@@ -164,14 +165,16 @@
                   <div class="favourite-devices-filters-menu"><a href="#" id="hall-filter-btn" class="favourite-devices-filters-menu-item-link">Зал</a></div>
                   <div class="favourite-devices-filters-menu"><a href="#" id="lamps-filter-btn" class="favourite-devices-filters-menu-item-link">Лампочки</a></div>
                   <div class="favourite-devices-filters-menu"><a href="#" id="cams-filter-btn" class="favourite-devices-filters-menu-item-link">Камеры</a></div>
+                  <div id="favourite-devices-filters-menu-back"></div>
                   <div class="favourite-devices-filters-menu-mob">
                     <a href="#" class="favourite-devices-filters-menu-item-link">Все</a>
-                    <object class="down-button" type="image/svg+xml" data="icon_arrow.svg" width="12" height="12"></object>
+                    <div id="down-button-tap"></div>
+                    <object class="down-button" type="image/svg+xml" data="icon_arrow2.svg" width="12" height="12"></object>
                   </div>
                 </div>
                 <div class="nav-buttons-devices">
-                  <img class="prev-button" src="Icons / Arrow Right / M Copy@2x.png">
-                  <img class="next-button" src="Icons / Arrow Right / M Copy@2x.png">
+                  <img id="prev-button-dev" src="icon-arrow-nav.png">
+                  <img id="next-button-dev" src="icon-arrow-nav.png">
                 </div>
               </div>
   
@@ -289,12 +292,16 @@
         <object type="image/svg+xml" data="icon_sun.svg" id="icon-sun" width="48" height="48"></object>
         <div id="modal-container-panel-text-primary"></div>
         <div id="modal-container-panel-text-secondary"></div>
-        <div id="modal-container-panel-controls-wrapper">
-          <div id="modal-container-panel-controls-btn-1"><a href="#" id="modal-container-panel-controls-buttons-text-1">Все</a></div>
-          <div id="modal-container-panel-controls-btn-2"><a href="#" id="modal-container-panel-controls-buttons-text-2">Все</a></div>
-          <div id="modal-container-panel-controls-btn-3"><a href="#" id="modal-container-panel-controls-buttons-text-3">Все</a></div>
-          <div id="modal-container-panel-controls-btn-4"><a href="#" id="modal-container-panel-controls-buttons-text-4">Все</a></div>
+
+        <div id="modal-container-panel-controls-wrapper-outer">
+          <div id="modal-container-panel-controls-wrapper">
+            <div id="modal-container-panel-controls-btn-1"><a href="#" id="modal-container-panel-controls-buttons-text-1">Все</a></div>
+            <div id="modal-container-panel-controls-btn-2"><a href="#" id="modal-container-panel-controls-buttons-text-2">Все</a></div>
+            <div id="modal-container-panel-controls-btn-3"><a href="#" id="modal-container-panel-controls-buttons-text-3">Все</a></div>
+            <div id="modal-container-panel-controls-btn-4"><a href="#" id="modal-container-panel-controls-buttons-text-4">Все</a></div>
+          </div>
         </div>
+
         <div id="modal-container-panel-slider-wrapper">
           <object type="image/svg+xml" data="icon_sun_max.svg" id="icon-sun-max" width="36" height="36"></object>
           <object type="image/svg+xml" data="icon_sun_min.svg" id="icon-sun-min" width="36" height="36"></object>
