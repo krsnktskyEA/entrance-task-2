@@ -117,6 +117,7 @@ var btnText0 = document.getElementById("modal-container-panel-controls-buttons-t
 var btnText1 = document.getElementById("modal-container-panel-controls-buttons-text-2")
 var btnText2 = document.getElementById("modal-container-panel-controls-buttons-text-3")
 var btnText3 = document.getElementById("modal-container-panel-controls-buttons-text-4")
+var panelControls = document.getElementById("modal-container-panel-controls-wrapper-outer")
 
 var btn0 = document.getElementById("modal-container-panel-controls-btn-1")
 var btn1 = document.getElementById("modal-container-panel-controls-btn-2")
@@ -125,25 +126,88 @@ var btn3 = document.getElementById("modal-container-panel-controls-btn-4")
 
 var popupIcon = document.getElementById("icon-sun")
 var popupSlider = document.getElementById("modal-container-panel-slider")
+var popupSliderRound = document.getElementById("modal-container-panel-slider-round")
 var iconSunMax = document.getElementById("icon-sun-max")
 var iconSunMin = document.getElementById("icon-sun-min")
 var textTempMax = document.getElementById("text-temp-max")
 var textTempMin = document.getElementById("text-temp-min")
+var sliderWrapper = document.getElementById("modal-container-panel-slider-wrapper")
 var sliderValue = document.getElementById("modal-container-panel-slider-value")
+var sliderValueRound = document.getElementById("modal-container-panel-slider-round-value")
+var sliderRoundIndicator = document.getElementById("modal-container-panel-slider-round-value-indicator")
+var leftZone = document.getElementById("left-zone")
+var rightZone = document.getElementById("right-zone")
+var whiteSector = document.getElementById("white-sector")
+var whiteCircle = document.getElementById("white-circle")
+var orangeCircle = document.getElementById("orange-circle")
+
+// defineRoundSliderTranslate...
+var defineRoundSliderTranslate = function (val) {
+  angleDeg = 9 * (Number(val) + 10)
+
+  if (angleDeg < 36) {
+    allowedAngleDeg = 36
+  } else if (angleDeg >= 36 && angleDeg <= 324) {
+    allowedAngleDeg = angleDeg
+  } else if (angleDeg > 324) {
+    allowedAngleDeg = 324
+  }
+
+  angleRad = allowedAngleDeg * (Math.PI / 180)
+  tg = Math.tan(angleRad)
+
+  if (val >= -10 && val <= 0) {
+    signX = 1
+    signY = -1
+  } else if (val > 0 && val <= 10) {
+    signX = -1
+    signY = -1
+  } else if (val > 10 && val <= 20) {
+    signX = -1
+    signY = 1
+  } else if (val > 20 && val <= 30) {
+    signX = 1
+    signY = 1
+  }
+
+  pxvw = 100 / window.innerWidth
+
+  if (activeZonePrev !== activeZone) {
+    activeZoneChanged = true
+  } else {
+    activeZoneChanged = false
+  }
+
+  if (window.innerWidth <= 1368) {
+    r = 83
+    x = (signX*r) / Math.sqrt(1 + (Math.tan(angleRad) * Math.tan(angleRad)))
+    y = signY * Math.sqrt(r*r - (x*x))
+    activeZoneChanged === false ? sliderRoundIndicator.style.transform = `translate(${y}px, ${x}px) rotate(${allowedAngleDeg - 180}deg)` : null
+  } else {
+    r = (window.innerWidth / 1368)*83
+    x = (signX*r) / Math.sqrt(1 + (Math.tan(angleRad) * Math.tan(angleRad)))
+    y = signY * Math.sqrt(r*r - (x*x))
+    activeZoneChanged === false ? sliderRoundIndicator.style.transform = `translate(${y}px, ${x}px) rotate(${allowedAngleDeg - 180}deg)` : null
+  }
+}
 
 // showPopup function
 var showPopup = function(textPrimary, textSecondary, buttonsText, icon, sliderId, iconSunMaxVis, iconSunMinVis, textTempMaxVis, textTempMinVis, sliderValueDisp, filtersStatus, popupNum, slidersStatus) {
 // console.log("popupNum=", popupNum)
+// console.log(slidersStatus)
 
 if (window.matchMedia("(max-width: 670px)").matches) {
   modalContainerPanel.style.height = "492px"
   modal.style.height = "642px"
+  modal.style.top = "calc(50vh - 321px)"
 } else if (window.matchMedia("(min-width: 670px) and (max-width: 1368px)").matches) {
-  popupNum === 7 ? modalContainerPanel.style.height = "343px" : modalContainerPanel.style.height = "238px"
-  popupNum === 7 ? modal.style.height = "424px" : modal.style.height = "318px"
+  popupNum === 1 ? modalContainerPanel.style.height = "343px" : modalContainerPanel.style.height = "238px"
+  popupNum === 1 ? modal.style.height = "424px" : modal.style.height = "318px"
+  popupNum === 1 ? modal.style.top = "calc(50vh - 212px)" : modal.style.top = "calc(50vh - 159px)"
 } else if (window.matchMedia("(min-width: 1368px)").matches) {
-  popupNum === 7 ? modalContainerPanel.style.height = "25.07vw" : modalContainerPanel.style.height = "17.39vw"
-  popupNum === 7 ? modal.style.height = "30.99vw" : modal.style.height = "23.24vw"
+  popupNum === 1 ? modalContainerPanel.style.height = "25.07vw" : modalContainerPanel.style.height = "17.39vw"
+  popupNum === 1 ? modal.style.height = "30.99vw" : modal.style.height = "23.24vw"
+  popupNum === 1 ? modal.style.top = "calc(50vh - 15.49vw)" : modal.style.top = "calc(50vh - 11.62vw)"
 }
 
   body.style.overflow = "hidden"
@@ -165,12 +229,34 @@ if (window.matchMedia("(max-width: 670px)").matches) {
   popupIcon.setAttribute("data", icon)
   popupSlider.setAttribute("id", sliderId);
   popupSlider.value = slidersStatus[popupNum];
+  popupSliderRound.value = slidersStatus[popupNum];
   iconSunMax.style.visibility = iconSunMaxVis;
   iconSunMin.style.visibility = iconSunMinVis;
   textTempMax.style.visibility = textTempMaxVis;
   textTempMin.style.visibility = textTempMinVis;
   sliderValue.style.display = sliderValueDisp;
   sliderValue.innerHTML = popupSlider.value;
+  sliderValueRound.style.display = sliderValueDisp;
+  sliderValueRound.innerHTML = popupSlider.value;
+
+  if (popupNum === 1) {
+    panelControls.style.display = "none"
+    sliderWrapper.setAttribute("class", "modal-container-panel-slider-wrapper-round")
+    popupSliderRound.style.display = "block"
+    popupSlider.style.display = "none"
+    whiteSector.style.display = "block"
+    whiteCircle.style.display = "flex"
+    orangeCircle.style.display = "block"
+    defineRoundSliderTranslate(slidersStatus[1])
+  } else {
+    panelControls.style.display = "block"
+    sliderWrapper.setAttribute("class", "modal-container-panel-slider-wrapper-linear")
+    popupSliderRound.style.display = "none"
+    popupSlider.style.display = "block"
+    whiteSector.style.display = "none"
+    whiteCircle.style.display = "none"
+    orangeCircle.style.display = "none"
+  }
 
   if (filtersStatus[popupNum][0] === true) {
     btn0.style.backgroundColor = "#ffd93e"
@@ -215,30 +301,93 @@ var xiaomiWarmFloorBtn = document.getElementById("xiaomiWarmFloor");
 var popupNumber
 
 xiaomiBulbBtn.addEventListener("click", function(){ showPopup('Xiaomi Yeelight LED Smart Bulb', 'Включено', lightParams, "icon_sun_2.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 0, slidersStatus); popupNumber = 0 });
-dlinkCamBtn.addEventListener("click", function(){ showPopup('D-Link Omna 180 Cam', 'Включится в 17:00', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 1, slidersStatus); popupNumber = 1 });
+dlinkCamBtn.addEventListener("click", function(){ showPopup('D-Link Omna 180 Cam', 'Включится в 17:00', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 3, slidersStatus); popupNumber = 3 });
 elgatoBtn.addEventListener("click", function(){ showPopup('Elgato Eve Degree Connected', 'Выключено до 17:00', elgatoParams, "icon_temperature.svg", "modal-container-panel-slider-termo", "hidden", "hidden", "visible", "visible", "block", filtersStatus, 2, slidersStatus); popupNumber = 2 });
-lifxMiniBtn.addEventListener("click", function(){ showPopup('LIFX Mini Day & Dusk A60 E27', 'Включится в 17:00', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 3, slidersStatus); popupNumber = 3 });
-xiaomiAirBtn.addEventListener("click", function(){ showPopup('Xiaomi Mi Air Purifier 2S', 'Включено', lightParams, "icon_sun_2.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 4, slidersStatus); popupNumber = 4 });
-zhiruiBtn.addEventListener("click", function(){ showPopup('Philips Zhirui', 'Выключено', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 5, slidersStatus); popupNumber = 5 });
-xiaomiBulbNextBtn.addEventListener("click", function(){ showPopup('Xiaomi Yeelight LED Smart Bulb', 'Включено', lightParams, "icon_sun_2.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 6, slidersStatus); popupNumber = 6 });
-xiaomiWarmFloorBtn.addEventListener("click", function(){ showPopup('Xiaomi Warm Floor', 'Включено', warmFloorParams, "icon_temperature_2.svg", "modal-container-panel-slider-termo", "hidden", "hidden", "hidden", "hidden", "block", filtersStatus, 7, slidersStatus); popupNumber = 7 });
+lifxMiniBtn.addEventListener("click", function(){ showPopup('LIFX Mini Day & Dusk A60 E27', 'Включится в 17:00', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 4, slidersStatus); popupNumber = 4 });
+xiaomiAirBtn.addEventListener("click", function(){ showPopup('Xiaomi Mi Air Purifier 2S', 'Включено', lightParams, "icon_sun_2.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 5, slidersStatus); popupNumber = 5 });
+zhiruiBtn.addEventListener("click", function(){ showPopup('Philips Zhirui', 'Выключено', lightParams, "icon_sun.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 6, slidersStatus); popupNumber = 6 });
+xiaomiBulbNextBtn.addEventListener("click", function(){ showPopup('Xiaomi Yeelight LED Smart Bulb', 'Включено', lightParams, "icon_sun_2.svg", "modal-container-panel-slider", "visible", "visible", "hidden", "hidden", "none", filtersStatus, 7, slidersStatus); popupNumber = 7 });
+xiaomiWarmFloorBtn.addEventListener("click", function(){ showPopup('Xiaomi Warm Floor', 'Включено', warmFloorParams, "icon_temperature_2.svg", "modal-container-panel-slider-round", "hidden", "hidden", "hidden", "hidden", "block", filtersStatus, 1, slidersStatus); popupNumber = 1 });
 
 
 // Popup slider
+var activeZone
+var activeZonePrev
+var activeZoneChanged
+var angleDeg
+var allowedAngleDeg
+var angleRad
+var tg
+var x
+var y
+var a
+var b
+var signX
+var signY
+var r
+var pxvw
+
+
 var popupSliderHandler = function(thisVal, pNumber) {
 
   slidersStatus[pNumber] = Number(thisVal)
 
+  if (pNumber === 1 && thisVal <= -6) {
+    thisVal = -6
+  } else if (pNumber === 1 && thisVal >= 26) {
+    thisVal = 26
+  }
+
   if (thisVal > 0) {
     sliderValue.innerHTML = "+" + thisVal;
+    sliderValueRound.innerHTML = "+" + thisVal
   } else if (thisVal == 0) {
     sliderValue.innerHTML = " " + thisVal;
+    sliderValueRound.innerHTML = " " + thisVal
   } else if (thisVal < 0) {
     sliderValue.innerHTML = thisVal;
+    sliderValueRound.innerHTML = thisVal
+  }
+
+  defineRoundSliderTranslate(thisVal)
+  activeZonePrev = activeZone
+}
+
+var inputTouchHandler = function(event, pNumber) {
+  event.touches[0].clientX >= (window.innerWidth / 2) - 5 ? activeZone = 'right' : activeZone = 'left'
+
+//  console.log('event=', event.touches[0].clientX, 'window.innerWidth=', window.innerWidth, 'activeZone=', activeZone)
+  if (pNumber === 1 && activeZone === 'left') {
+    popupSliderRound.setAttribute("min", -10)
+    popupSliderRound.setAttribute("max", 10)
+    popupSliderRound.style.transform = "rotate(-90deg)"
+  } else if (pNumber === 1 && activeZone === 'right') {
+    popupSliderRound.setAttribute("min", 10)
+    popupSliderRound.setAttribute("max", 30)
+    popupSliderRound.style.transform = "rotate(90deg)"
+  }
+}
+
+var inputMouseHandler = function(event, pNumber) {
+  event.pageX >= (window.innerWidth / 2) - 5 ? activeZone = 'right' : activeZone = 'left'
+
+//  console.log('event=', event.pageX, 'window.innerWidth=', window.innerWidth, 'activeZone=', activeZone)
+  if (pNumber === 1 && activeZone === 'left') {
+    popupSliderRound.setAttribute("min", -10)
+    popupSliderRound.setAttribute("max", 10)
+    popupSliderRound.style.transform = "rotate(-90deg)"
+  } else if (pNumber === 1 && activeZone === 'right') {
+    popupSliderRound.setAttribute("min", 10)
+    popupSliderRound.setAttribute("max", 30)
+    popupSliderRound.style.transform = "rotate(90deg)"
   }
 }
 
 popupSlider.addEventListener("input", function(){ popupSliderHandler(this.value, popupNumber); });
+popupSliderRound.addEventListener("input", function(){ popupSliderHandler(this.value, popupNumber); });
+popupSliderRound.addEventListener("touchmove", function(){ inputTouchHandler(event, popupNumber); });
+popupSliderRound.addEventListener("mousemove", function(){ inputMouseHandler(event, popupNumber); });
+
 
 
 // Popup filters btns
@@ -271,6 +420,7 @@ var popupFilterHandler = function(filterNum, popupNum) {
     popupSlider.disabled = true
   }
   popupSlider.value = slidersStatus[popupNum];
+  popupSliderRound.value = slidersStatus[popupNum];
 
   filtersStatus[popupNum][0] === true ? btn0.style.backgroundColor = "#ffd93e" : btn0.style.backgroundColor = "#f7f7f7"
   filtersStatus[popupNum][1] === true ? btn1.style.backgroundColor = "#ffd93e" : btn1.style.backgroundColor = "#f7f7f7"
@@ -289,12 +439,32 @@ var resizeHandlerPopupHeight = function(popupNum) {
   if (window.matchMedia("(max-width: 670px)").matches) {
     modalContainerPanel.style.height = "492px"
     modal.style.height = "642px"
+    modal.style.top = "calc(50vh - 321px)"
+
+    r = 83
+    x = (signX*r) / Math.sqrt(1 + (Math.tan(angleRad) * Math.tan(angleRad)))
+    y = signY * Math.sqrt(r*r - (x*x))
+    sliderRoundIndicator.style.transform = `translate(${y}px, ${x}px) rotate(${allowedAngleDeg - 180}deg)`;
+    
   } else if (window.matchMedia("(min-width: 670px) and (max-width: 1368px)").matches) {
-    popupNum === 7 ? modalContainerPanel.style.height = "343px" : modalContainerPanel.style.height = "238px"
-    popupNum === 7 ? modal.style.height = "424px" : modal.style.height = "318px"
+    popupNum === 1 ? modalContainerPanel.style.height = "343px" : modalContainerPanel.style.height = "238px"
+    popupNum === 1 ? modal.style.height = "424px" : modal.style.height = "318px"
+    popupNum === 1 ? modal.style.top = "calc(50vh - 212px)" : modal.style.top = "calc(50vh - 159px)"
+
+    r = 83
+    x = (signX*r) / Math.sqrt(1 + (Math.tan(angleRad) * Math.tan(angleRad)))
+    y = signY * Math.sqrt(r*r - (x*x))
+    sliderRoundIndicator.style.transform = `translate(${y}px, ${x}px) rotate(${allowedAngleDeg - 180}deg)`;
+
   } else if (window.matchMedia("(min-width: 1368px)").matches) {
-    popupNum === 7 ? modalContainerPanel.style.height = "25.07vw" : modalContainerPanel.style.height = "17.39vw"
-    popupNum === 7 ? modal.style.height = "30.99vw" : modal.style.height = "23.24vw"
+    popupNum === 1 ? modalContainerPanel.style.height = "25.07vw" : modalContainerPanel.style.height = "17.39vw"
+    popupNum === 1 ? modal.style.height = "30.99vw" : modal.style.height = "23.24vw"
+    popupNum === 1 ? modal.style.top = "calc(50vh - 15.49vw)" : modal.style.top = "calc(50vh - 11.62vw)"
+
+    r = (window.innerWidth / 1368)*83
+    x = (signX*r) / Math.sqrt(1 + (Math.tan(angleRad) * Math.tan(angleRad)))
+    y = signY * Math.sqrt(r*r - (x*x))
+    sliderRoundIndicator.style.transform = `translate(${y}px, ${x}px) rotate(${allowedAngleDeg - 180}deg)`;
   }
 }
 
@@ -357,13 +527,13 @@ allBtn.onclick = function() {
   } else {
     allBtn.style.backgroundColor = "#f7f7f7"
     lampsBtnStatus ? all[0].style.display = "flex" : all[0].style.display = "none"
-    camsBtnStatus ? all[1].style.display = "flex" : all[1].style.display = "none"
+    camsBtnStatus ? all[3].style.display = "flex" : all[3].style.display = "none"
     hallBtnStatus ? all[2].style.display = "flex" : all[2].style.display = "none"
-    lampsBtnStatus ? all[3].style.display = "flex" : all[3].style.display = "none"
-    kitchenBtnStatus ? all[4].style.display = "flex" : all[4].style.display = "none"
-    lampsBtnStatus ? all[5].style.display = "flex" : all[5].style.display = "none"
+    lampsBtnStatus ? all[4].style.display = "flex" : all[4].style.display = "none"
+    kitchenBtnStatus ? all[5].style.display = "flex" : all[5].style.display = "none"
     lampsBtnStatus ? all[6].style.display = "flex" : all[6].style.display = "none"
-    kitchenBtnStatus ? all[7].style.display = "flex" : all[7].style.display = "none"
+    lampsBtnStatus ? all[7].style.display = "flex" : all[7].style.display = "none"
+    kitchenBtnStatus ? all[1].style.display = "flex" : all[1].style.display = "none"
   }
 }
 
@@ -563,7 +733,7 @@ var touchMoveHandler = function(elem) {
   elem.style.backgroundColor = "#fff"
 
   var coordsLeftFD = xiaomiBulbBtn.getBoundingClientRect()
-  var coordsRightFD = xiaomiWarmFloorBtn.getBoundingClientRect()
+  var coordsRightFD = xiaomiBulbNextBtn.getBoundingClientRect()
   var wrapperCoordsFD = favDevsWrapper[0].getBoundingClientRect()
 
   var coordsLeftSce = favScenarioLeft.getBoundingClientRect()

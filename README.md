@@ -2,9 +2,10 @@
 <hr>
 <p>Это задание проверяет, насколько хорошо вы умеете верстать и знаете особенности браузеров</p>
 <ul>
-<li>существенно дополнил верстку по сравнению с прошлым разом;</li>
+<li>https://github.com/yandex-shri-2018/entrance-task-2-2;</li>
+<li>https://yandex-shri-2018.github.io/entrance-task-2-2/guide/#artboard7;</li>
+<li>можно смотреть в режиме эмуляции мобильных устройств (chrome, opera);</li>
 <li>мне пока не нравится js-файл - его оптимизация занимала наименьший приоритет среди всех дел;</li>
-<li>не доделан круговой слайдер для warm floor. Ориентироваться буду на <a href="https://codepen.io/XCanG/pen/pwPbmo">https://codepen.io/XCanG/pen/pwPbmo</a> и <a href="http://jsfiddle.net/soundar24/LpuLe9tr/3/">http://jsfiddle.net/soundar24/LpuLe9tr/3/</a></li>
 </ul>
 <hr>
 <p><em><code>cd task-2</code><br>

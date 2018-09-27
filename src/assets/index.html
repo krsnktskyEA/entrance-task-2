@@ -190,12 +190,12 @@
                     </div>
                   </div>
 
-                  <div id="dlinkCam" class="favourite-device-panel cams all">
+                  <div id="xiaomiWarmFloor" class="favourite-device-panel kitchen all">
                     <div class="favourite-device-panel-content" >
-                      <object class="favourite-device-panel-icon" type="image/svg+xml" data="icon_sun.svg" width="24" height="24"></object>
+                      <object class="favourite-device-panel-icon" type="image/svg+xml" data="icon_temperature_2.svg" width="24" height="24"></object>
                       <div class="favourite-device-panel-text">
-                        <div class="favourite-device-panel-text-primary">D-Link Omna 180 Cam</div>
-                        <div class="favourite-device-panel-text-secondary">Включится в 17:00</div>
+                        <div class="favourite-device-panel-text-primary">Xiaomi Warm Floor</div>
+                        <div class="favourite-device-panel-text-secondary">Включено</div>
                       </div>
                     </div>
                   </div>
@@ -206,6 +206,16 @@
                       <div class="favourite-device-panel-text">
                         <div class="favourite-device-panel-text-primary">Elgato Eve Degree Connected</div>
                         <div class="favourite-device-panel-text-secondary">Выключено до 17:00</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div id="dlinkCam" class="favourite-device-panel cams all">
+                    <div class="favourite-device-panel-content" >
+                      <object class="favourite-device-panel-icon" type="image/svg+xml" data="icon_sun.svg" width="24" height="24"></object>
+                      <div class="favourite-device-panel-text">
+                        <div class="favourite-device-panel-text-primary">D-Link Omna 180 Cam</div>
+                        <div class="favourite-device-panel-text-secondary">Включится в 17:00</div>
                       </div>
                     </div>
                   </div>
@@ -245,16 +255,6 @@
                       <object class="favourite-device-panel-icon" type="image/svg+xml" data="icon_sun_2.svg" width="24" height="24"></object>
                       <div class="favourite-device-panel-text">
                         <div class="favourite-device-panel-text-primary">Xiaomi Yeelight LED Smart Bulb</div>
-                        <div class="favourite-device-panel-text-secondary">Включено</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div id="xiaomiWarmFloor" class="favourite-device-panel kitchen all">
-                    <div class="favourite-device-panel-content" >
-                      <object class="favourite-device-panel-icon" type="image/svg+xml" data="icon_temperature.svg" width="24" height="24"></object>
-                      <div class="favourite-device-panel-text">
-                        <div class="favourite-device-panel-text-primary">Xiaomi Warm Floor</div>
                         <div class="favourite-device-panel-text-secondary">Включено</div>
                       </div>
                     </div>
@@ -302,14 +302,20 @@
           </div>
         </div>
 
-        <div id="modal-container-panel-slider-wrapper">
+        <div id="modal-container-panel-slider-wrapper" class="modal-container-panel-slider-wrapper-linear">
           <object type="image/svg+xml" data="icon_sun_max.svg" id="icon-sun-max" width="36" height="36"></object>
           <object type="image/svg+xml" data="icon_sun_min.svg" id="icon-sun-min" width="36" height="36"></object>
           <div id="text-temp-max">+30</div>
           <div id="text-temp-min">-10</div>
-        
+          <div id="white-sector"></div>
+          <div id="orange-circle"></div>
+          <div id="white-circle">
+            <div id="modal-container-panel-slider-round-value">10</div>
+            <object type="image/svg+xml" data="icon_arrow.svg" id="modal-container-panel-slider-round-value-indicator"></object>
+          </div> 
           <div>
             <input type="range" min="-10" max="30" value="10" id="modal-container-panel-slider">
+            <input type="range" min="-10" max="30" value="10" id="modal-container-panel-slider-round">
           </div>
 
         </div>
